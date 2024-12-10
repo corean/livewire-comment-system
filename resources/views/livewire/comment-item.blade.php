@@ -9,6 +9,7 @@
         <div class="font-semibold">{{ $comment->user->name }}</div>
         <div class="text-sm">{{ $comment->created_at->diffForHumans() }}</div>
     </div>
+
     <div class="mt-4">
         {{ $comment->body }}
     </div>
@@ -18,6 +19,7 @@
                 x-on:click="replying = true;">Reply
         </button>
     </div>
+
     <template x-if="replying">
         <form wire:submit="replyComment" class="mt-4">
             <x-textarea wire:model="replyForm.body"
@@ -37,4 +39,13 @@
             </div>
         </form>
     </template>
+
+    @if (is_null($comment->parent_id) && $comment->children->count())
+        <div class="mt-8 ml-8">
+            @foreach($comment->children as $child)
+                <livewire:comment-item :comment="$child" :key="$child->id"/>
+            @endforeach
+        </div>
+    @endif
+
 </div>
