@@ -27,7 +27,7 @@ class Comments extends Component
     public function render()
     {
         return view('livewire.comments', [
-            'comments' => $this->model->comments
+            'comments' => $this->model->comments()->latest()->get(),
         ]);
     }
 }
