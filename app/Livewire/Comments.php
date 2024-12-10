@@ -2,12 +2,27 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\CreateComment;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Comments extends Component
 {
     public Model $model;
+
+    public CreateComment $form;
+
+    public function addComment()
+    {
+        $this->form->validate();
+
+        $comment = $this->model->comments()->make($this->form->only('body'));
+        $comment->user()->associate(auth()->user());
+        $comment->save();
+
+        $this->form->reset();
+    }
 
     public function render()
     {
