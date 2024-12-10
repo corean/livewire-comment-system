@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\CreateComment;
+use App\Livewire\Forms\EditComment;
 use App\Models\Comment;
 use Livewire\Component;
 
@@ -11,6 +12,12 @@ class CommentItem extends Component
     public Comment $comment;
 
     public CreateComment $replyForm;
+    public EditComment   $editForm;
+
+    public function mount()
+    {
+        $this->editForm->body = $this->comment->body;
+    }
 
     public function replyComment()
     {
@@ -23,6 +30,19 @@ class CommentItem extends Component
         $reply->save();
 
         $this->dispatch('replied', $this->comment->id);
+
+        $this->replyForm->reset();
+    }
+
+    public function updateComment()
+    {
+        $this->authorize('edit', $this->comment);
+
+        $this->editForm->validate();
+
+        $this->comment->update($this->editForm->only('body'));
+
+        $this->dispatch('edited', $this->comment->id);
 
         $this->replyForm->reset();
     }
