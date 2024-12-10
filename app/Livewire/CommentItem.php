@@ -13,6 +13,7 @@ class CommentItem extends Component
 
     public CreateComment $replyForm;
     public EditComment   $editForm;
+    public bool          $deleted = false;
 
     public function mount()
     {
@@ -45,6 +46,19 @@ class CommentItem extends Component
         $this->dispatch('edited', $this->comment->id);
 
         $this->replyForm->reset();
+    }
+
+    public function deleteComment()
+    {
+        $this->authorize('delete', $this->comment);
+
+        if ($this->comment->children->isNotEmpty()) {
+            // error message
+            return;
+        }
+        $this->comment->delete();
+
+        $this->deleted = true;
     }
 
     public function render()
