@@ -10,17 +10,17 @@ class CommentItem extends Component
 {
     public Comment $comment;
 
-    public CreateComment $form;
+    public CreateComment $replyForm;
 
     public function replyComment()
     {
-        $this->form->validate();
+        $this->replyForm->validate();
 
-        $reply = $this->comment->replies()->make($this->form->only('body'));
+        $reply = $this->comment->children()->make($this->replyForm->only('body'));
         $reply->user()->associate(auth()->user());
         $reply->save();
 
-        $this->form->reset();
+        $this->replyForm->reset();
     }
 
     public function render()

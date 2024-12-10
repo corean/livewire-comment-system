@@ -27,7 +27,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function replies()
+    public function children()
     {
         return $this->hasMany(__CLASS__, 'parent_id');
     }

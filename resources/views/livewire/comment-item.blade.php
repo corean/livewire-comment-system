@@ -19,18 +19,18 @@
     </div>
     <template x-if="replying">
         <form wire:submit="replyComment" class="mt-4">
-            <x-textarea wire:model="form.body"
+            <x-textarea wire:model="replyForm.body"
                         class="w-full"
                         placeholder="Post a comment"
                         rows="3"
             />
-            <x-input-error :messages="$errors->get('form.body')"/>
+            <x-input-error :messages="$errors->get('replyForm.body')"/>
             <div class="flex items-baseline space-x-2">
                 <x-primary-button class="mt-2"
                 >Post a comment
                 </x-primary-button>
-                <button class="text-sm text-gray-500"
-                        x-on:click="replying = false"
+                <button x-on:click="replying = false"
+                        class="text-sm text-gray-500"
                 >Cancel
                 </button>
             </div>
