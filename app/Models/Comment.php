@@ -32,4 +32,9 @@ class Comment extends Model
         return $this->hasMany(__CLASS__, 'parent_id');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+
 }

@@ -14,10 +14,12 @@
         {{ $comment->body }}
     </div>
 
-    <div class="mt-4">
-        <button class="text-sm text-gray-500"
-                x-on:click="replying = true;">Reply
-        </button>
+    <div class="mt-6 text-sm flex items-baseline space-x-3">
+        @can('reply', $comment)
+            <button class="text-sm text-gray-500"
+                    x-on:click="replying = true;">Reply
+            </button>
+        @endcan
     </div>
 
     <template x-if="replying">

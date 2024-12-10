@@ -14,6 +14,8 @@ class CommentItem extends Component
 
     public function replyComment()
     {
+        $this->authorize('reply', $this->comment);
+
         $this->replyForm->validate();
 
         $reply = $this->comment->children()->make($this->replyForm->only('body'));
