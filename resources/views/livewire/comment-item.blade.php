@@ -1,6 +1,7 @@
 <div
         class="my-6"
         x-data="{ replying: false }"
+        x-on:replied.window="replying = false"
 >
     <div class="flex item-center space-x-2">
         <img src="" alt=""

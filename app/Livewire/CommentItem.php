@@ -20,6 +20,8 @@ class CommentItem extends Component
         $reply->user()->associate(auth()->user());
         $reply->save();
 
+        $this->dispatch('replied', $this->comment->id);
+
         $this->replyForm->reset();
     }
 
