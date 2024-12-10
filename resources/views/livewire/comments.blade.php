@@ -3,20 +3,14 @@
     <h2>Comments ({{ $comments->count() }})</h2>
 
     @auth
-        <form class="mt-4">
-            <div>
-                <x-textarea wire:model="form.body"
-                            class="w-full"
-                            placeholder="Post a comment"
-                            rows="4"
-                />
-                <x-input-error :messages="$errors->get('form.body')"/>
-                <x-primary-button
-                        wire:click.prevent="addComment"
-                        class="mt-2">Post a comment
-                </x-primary-button>
-
-            </div>
+        <form class="mt-4" wire:submit="createComment">
+            <x-textarea wire:model="form.body"
+                        class="w-full"
+                        placeholder="Post a comment"
+                        rows="4"
+            />
+            <x-input-error :messages="$errors->get('form.body')"/>
+            <x-primary-button class="mt-2">Post a comment</x-primary-button>
         </form>
     @endauth
 

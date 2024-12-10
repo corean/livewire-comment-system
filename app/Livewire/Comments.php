@@ -13,7 +13,7 @@ class Comments extends Component
 
     public CreateComment $form;
 
-    public function addComment()
+    public function createComment()
     {
         $this->form->validate();
 
