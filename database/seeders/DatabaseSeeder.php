@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
             'email'    => 'corean@corean.biz',
             'password' => bcrypt('!Cor23410'),
         ]);
+
+        User::factory()->create([
+            'name'     => 'na6858',
+            'email'    => 'na6858@naver.com',
+            'password' => bcrypt('secret'),
+        ]);
     }
 }

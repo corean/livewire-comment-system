@@ -7,7 +7,8 @@
                 x-on:edited.window="editing = false"
         >
             <div class="flex item-center space-x-2">
-                <img src="" alt=""
+                <img src="{{ $comment->user->avatar() }}"
+                     alt="{{ $comment->user->name }}"
                      class="size-8 rounded-full bg-black">
                 <div class="font-semibold">{{ $comment->user->name }}</div>
                 <div class="text-sm">{{ $comment->created_at->diffForHumans() }}</div>
