@@ -11,7 +11,11 @@
                      alt="{{ $comment->user->name }}"
                      class="size-8 rounded-full bg-black">
                 <div class="font-semibold">{{ $comment->user->name }}</div>
-                <div class="text-sm">{{ $comment->created_at->diffForHumans() }}</div>
+                <div class="text-sm"
+                     x-human-date
+                     datetime="{{ $comment->created_at->toDateTimeString() }}">
+                    {{ $comment->created_at->diffForHumans() }}
+                </div>
             </div>
 
             @can('edit', $comment)
